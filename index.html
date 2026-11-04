@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Javier — Computer Science Student</title>
+<meta name="description" content="Portfolio of Javier, game programming student at DigiPen.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000;
+    --card: #0b0f17;
+    --line: #1a2233;
+    --text: #f2f4f8;
+    --muted: #8a94a8;
+    --blue: #3b82f6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: "Inter", system-ui, sans-serif; line-height: 1.6; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .layout { max-width: 1100px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 380px 1fr; gap: 64px; }
+
+  aside { position: sticky; top: 0; height: 100vh; padding: 80px 0; display: flex; flex-direction: column; }
+  aside h1 { font-size: 42px; line-height: 1.1; }
+  aside .role { color: var(--blue); font-size: 18px; font-weight: 500; margin-top: 8px; }
+  aside .bio { color: var(--muted); margin-top: 16px; max-width: 320px; }
+  aside nav { margin-top: 48px; display: flex; flex-direction: column; gap: 12px; }
+  aside nav a { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 12px; }
+  aside nav a:hover { color: var(--blue); text-decoration: none; }
+  aside .social { margin-top: auto; display: flex; gap: 20px; font-weight: 500; font-size: 15px; }
+
+  main { padding: 80px 0; }
+  section { margin-bottom: 72px; scroll-margin-top: 40px; }
+  h2 { font-size: 13px; color: var(--blue); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+
+  .about p { color: var(--muted); margin-bottom: 14px; }
+  .about strong { color: var(--text); font-weight: 500; }
+
+  .project { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin-bottom: 14px; }
+  .project:hover { border-color: var(--blue); }
+  .project h3 { font-size: 17px; }
+  .project h3 a { color: var(--text); }
+  .project h3 a:hover { color: var(--blue); text-decoration: none; }
+  .actions { display: flex; gap: 10px; margin-top: 14px; }
+  .actions a, .actions button { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--line); background: none; color: var(--text); cursor: pointer; }
+  .actions a:hover, .actions button:hover { border-color: var(--blue); color: var(--blue); text-decoration: none; }
+
+  .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.92); display: none; align-items: center; justify-content: center; padding: 24px; }
+  .lightbox.open { display: flex; }
+  .lightbox figure { max-width: 1000px; width: 100%; text-align: center; }
+  .lightbox img { max-width: 100%; max-height: 78vh; border-radius: 8px; border: 1px solid var(--line); }
+  .lightbox iframe { display: none; width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 8px; background: #000; }
+  .lightbox.video iframe { display: block; }
+  .lightbox.video img, .lightbox.video .lb-prev, .lightbox.video .lb-next { display: none !important; }
+  .lightbox figcaption { color: var(--muted); font-size: 14px; margin-top: 12px; }
+  .lightbox button { position: absolute; background: none; border: none; color: var(--text); font-size: 32px; cursor: pointer; padding: 12px; line-height: 1; }
+  .lightbox button:hover { color: var(--blue); }
+  .lb-close { top: 12px; right: 16px; }
+  .lb-prev { left: 8px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 8px; top: 50%; transform: translateY(-50%); }
+  .project p { color: var(--muted); font-size: 15px; margin: 6px 0 12px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags span { font-size: 12px; color: var(--blue); background: rgba(59,130,246,.1); padding: 3px 10px; border-radius: 99px; }
+
+  .exp { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .exp .when { color: var(--muted); font-size: 13px; padding-top: 2px; }
+  .exp b { font-weight: 500; display: block; margin-bottom: 6px; }
+  .exp p { color: var(--muted); font-size: 14px; }
+  .exp ul { color: var(--muted); font-size: 14px; padding-left: 18px; margin-top: 4px; }
+  .exp li { margin-bottom: 2px; }
+
+  footer { color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; gap: 0; padding: 0 20px; }
+    aside { position: static; height: auto; padding: 56px 0 24px; }
+    aside nav { display: none; }
+    aside .social { margin-top: 24px; }
+    main { padding: 24px 0 56px; }
+    .exp { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <aside>
+    <h1>Javier</h1>
+    <p class="role">Computer Science Undergraduate Student</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+    </nav>
+    <div class="social">
+      <a href="https://github.com/Siestasies">GitHub</a>
+      <a href="https://www.linkedin.com/in/javier-chua/">LinkedIn</a>
+      <a href="resume.pdf">Resume</a>
+    </div>
+  </aside>
+
+  <main>
+    <section id="about" class="about">
+      <h2>About</h2>
+      <p>Before university, I was a professional competitive gamer. I reached the highest level of my game, competing in Japan and living in South Korea, where tournaments were my full-time job. Playing on international teams taught me to adapt to different cultures and personalities, and to work through pressure and conflict.</p>
+      <p>A game made by strangers on another continent shaped who I became and opened doors I never imagined. Now I want to be on the other side: building games and software that impact someone else the way they impacted me.</p>
+      <p>That’s what brought me to Singapore Institute of Technology's Computer Science in Real-Time Interactive Simulation. I bring the same teamwork to every project: aligning on goals early, raising misunderstandings before they grow, and staying until the work is done.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <div class="project">
+        <h3><a href="https://github.com/Siestasies/GAM200-250_UmapyoiEngine">Umapyoi Engine</a></h3>
+        <p>Custom C++ / OpenGL 2D engine, editor and elemental action game, built by a team of six over a year. I built the graphics pipeline, sprite animation, particles, 2D lighting, materials and shaders, the editor camera and cutscenes.</p>
+        <div class="tags"><span>C++</span><span>OpenGL</span><span>ECS</span><span>Lua</span></div>
+        <div class="actions">
+          <button data-title="Umapyoi Engine" data-images="images/umapyoi1.png, images/umapyoi2.png">Screenshots</button>
+          <a href="https://github.com/Siestasies/GAM200-250_UmapyoiEngine">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3><a href="https://github.com/Siestasies/GAM150_PARRY_EVERYTHING">Parry Everything</a></h3>
+        <p>Top-down 2D roguelite built around timing parries, made by a team of five. I built the procedural dungeon generator, the branching node travel map, the minimap, camera shake and level progression.</p>
+        <div class="tags"><span>C++</span><span>Procedural generation</span></div>
+        <div class="actions">
+          <button data-title="Parry Everything" data-video="1siA13nhERY">Watch video</button>
+          <a href="https://github.com/Siestasies/GAM150_PARRY_EVERYTHING">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3><a href="https://github.com/Siestasies/GAM100_DROOM">DROOM!</a></h3>
+        <p>Doom-style 2.5D software-rendered engine written from scratch in C by a team of five. I built the enemy AI state machine, the splash screen, the main menu and the player HUD.</p>
+        <div class="tags"><span>C</span><span>Software rendering</span><span>FMOD</span></div>
+        <div class="actions">
+          <button data-title="DROOM!" data-video="exFm-qtfQ5c">Watch video</button>
+          <a href="https://github.com/Siestasies/GAM100_DROOM">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3>MRI Vital-Sign Monitor</h3>
+        <p>Diagnostic tool on a Raspberry Pi touchscreen that reads and displays Bluetooth vital-sign data from an oximeter and a smart watch, in collaboration with Changi General Hospital. Received a merit award.</p>
+        <div class="tags"><span>Python</span><span>Raspberry Pi</span><span>Bluetooth LE</span></div>
+        <div class="actions">
+          <button data-title="MRI Vital-Sign Monitor" data-images="images/mri1.png, images/mri2.png, images/mri3.png, images/mri4.png">Photos</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="exp"><span class="when">Now</span><div><b>BSc (Hons) Computer Science in Real-Time Interactive Simulation - Singapore Institute of Technology &amp; DigiPen Institute of Technology</b><p>Joint degree covering computer graphics, game AI, machine learning, linear algebra and physics, with multi-trimester team software projects.</p></div></div>
+      <div class="exp"><span class="when">Oct 2023 - Mar 2024</span><div><b>Professional Esports Player - International Team</b><p>Pursued a professional esports career after National Service, including about 2 months living in Korea. Competed at:</p><ul><li>Riot Games ONE PRO INVITATIONAL 2023 (K-Arena Yokohama, Japan)</li><li>VALORANT Champions Tour 2024: Pacific Kickoff (S FACTORY Seoul, Korea)</li></ul><div class="actions"><button data-title="Professional Esports Player" data-video="XvKOaCK6rV0">Watch video</button></div></div></div>
+      <div class="exp"><span class="when">Oct 2021 - Sep 2023</span><div><b>Administrative Assistant - Republic of Singapore Air Force</b><p>National Service at Air Force Training Command (AFTC).</p><ul><li>Awarded Airman of the Month (July 2023)</li><li>Managed trainee administrative and personal data for pilot training courses</li><li>Built Excel auto-fill formulas to streamline data entry and reduce manual errors</li><li>Digitalised physical forms and maintained archiving of training records</li></ul></div></div>
+      <div class="exp"><span class="when">Mar - Aug 2020</span><div><b>Software Intern - Airbus Singapore</b><p>Built a React + Material UI admin dashboard for SSO and role management, working with Node.js, MySQL, Docker and Git.</p></div></div>
+      <div class="exp"><span class="when">2018 - 2021</span><div><b>Diploma in Computer Engineering - Temasek Polytechnic</b><p>Major Project Merit Award.</p></div></div>
+    </section>
+
+  </main>
+
+</div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous">&#8249;</button>
+  <figure><img id="lb-img" alt=""><iframe id="lb-vid" title="Project video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe><figcaption id="lb-cap"></figcaption></figure>
+  <button class="lb-next" aria-label="Next">&#8250;</button>
+</div>
+<script>
+  const lb = document.getElementById("lightbox"), img = document.getElementById("lb-img"), cap = document.getElementById("lb-cap");
+  let list = [], idx = 0, title = "";
+  function show() {
+    img.src = list[idx]; img.alt = title + " screenshot " + (idx + 1);
+    cap.textContent = title + (list.length > 1 ? "  ·  " + (idx + 1) + " / " + list.length : "");
+    lb.querySelector(".lb-prev").style.display = lb.querySelector(".lb-next").style.display = list.length > 1 ? "" : "none";
+  }
+  function step(d) { idx = (idx + d + list.length) % list.length; show(); }
+  const vid = document.getElementById("lb-vid");
+  function close() { lb.classList.remove("open", "video"); vid.src = ""; }
+  document.querySelectorAll("[data-video]").forEach(b => b.addEventListener("click", () => {
+    vid.src = "https://www.youtube-nocookie.com/embed/" + b.dataset.video + "?autoplay=1&rel=0";
+    cap.innerHTML = "";
+    const yt = document.createElement("a");
+    yt.href = "https://www.youtube.com/watch?v=" + b.dataset.video; yt.target = "_blank"; yt.rel = "noopener";
+    yt.textContent = "Watch on YouTube ↗";
+    cap.append(b.dataset.title + "  ·  ", yt);
+    lb.classList.add("open", "video");
+  }));
+  document.querySelectorAll("[data-images]").forEach(b => b.addEventListener("click", () => {
+    const all = b.dataset.images.split(",").map(x => x.trim()).filter(Boolean);
+    title = b.dataset.title; idx = 0; list = all.slice(); show(); lb.classList.add("open");
+    all.forEach(src => { const t = new Image(); t.onerror = () => { const i = list.indexOf(src); if (i < 0) return; list.splice(i, 1); if (idx >= list.length) idx = Math.max(0, list.length - 1); list.length ? show() : (cap.textContent = "Screenshots coming soon.", img.removeAttribute("src")); }; t.src = src; });
+  }));
+  img.addEventListener("error", () => {
+    list.splice(idx, 1);
+    if (!list.length) { cap.textContent = "Screenshots coming soon."; img.removeAttribute("src"); return; }
+    idx %= list.length; show();
+  });
+  lb.querySelector(".lb-close").onclick = close;
+  lb.querySelector(".lb-prev").onclick = () => step(-1);
+  lb.querySelector(".lb-next").onclick = () => step(1);
+  lb.addEventListener("click", e => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", e => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    if (lb.classList.contains("video")) return;
+    if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "ArrowRight") step(1);
+  });
+</script>
+</body>
+</html>
